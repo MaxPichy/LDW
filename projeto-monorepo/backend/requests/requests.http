@@ -4,8 +4,16 @@ GET http://localhost:3000/api/health
 ### Listar Usuários
 GET http://localhost:3000/api/users
 
-### Criar Usuário
-POST http://localhost:3000/api/users
+### Buscar Usuário
+GET http://localhost:3000/api/users/1
+Content-Type: application/json
+
+### Atualizar Usuário
+PUT http://localhost:3000/api/users/1
+Content-Type: application/json
+
+### Deletar Usuário
+DELETE http://localhost:3000/api/users/1
 Content-Type: application/json
 
 {
