@@ -5,7 +5,7 @@ on:
     branches:
       - main
   # Dispara na abertura ou atualização de Pull Request direcionados para a branch main
-  pull_requests:
+  pull_request:
     branches:
       - main
   # Permite execução manual pelo painel web do Github (aba Actions -> Run workflow)
@@ -13,10 +13,10 @@ on:
 
 jobs:
   validar-monorepo:
-    name: Validar Backend, Frontend e Docker
-    runs_on: ubuntu-latest
-
-    steps:
+      name: Validar Backend, Frontend e Docker
+      runs-on: ubuntu-latest
+      
+      steps:
       - name: 1. Baixar o codigo fonte
         uses: actions/checkout@v4
 
