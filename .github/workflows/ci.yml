@@ -25,7 +25,7 @@ jobs:
         with:
           version: 11
 
-      - name: 3. Configurar o Node.js 20 com Cache de Dependencias
+      - name: 3. Configurar o Node.js
         uses: actions/setup-node@v4
 
       - name: 4. Instalar Dependências do Backend
@@ -33,6 +33,7 @@ jobs:
           cd projeto-monorepo
           cd backend
           pnpm install --frozen-lockfile
+          pnpm approve-builds
 
       - name: 5. Validar Tipos e Compilar o Backend (Express)
         run: |
