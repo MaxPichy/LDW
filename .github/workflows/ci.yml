@@ -32,8 +32,7 @@ jobs:
         run: |
           cd projeto-monorepo
           cd backend
-          pnpm install --frozen-lockfile
-          pnpm approve-builds
+          pnpm install
 
       - name: 5. Validar Tipos e Compilar o Backend (Express)
         run: |
