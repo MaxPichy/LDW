@@ -32,11 +32,13 @@ jobs:
 
       - name: 4. Instalar Dependências do Backend
         run: |
+          cd projeto-monorepo
           cd backend
           pnpm install --frozen-lockfile
 
       - name: 5. Validar Tipos e Compilar o Backend (Express)
         run: |
+          cd projeto-monorepo
           cd backend
           pnpm run build
 
