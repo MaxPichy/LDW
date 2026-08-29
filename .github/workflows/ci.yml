@@ -25,10 +25,10 @@ jobs:
         with:
           version: 11
 
-      - name: 3. Configurar o Node.js 24 com Cache de Dependencias
+      - name: 3. Configurar o Node.js 20 com Cache de Dependencias
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 20
 
       - name: 4. Instalar Dependências do Backend
         run: |
