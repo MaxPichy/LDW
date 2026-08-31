@@ -1,4 +1,6 @@
 import { Request, Response } from "express";
+import { JWT_SECRET } from "../config/auth";
+import bcrypt from 'bcryptjs'
 import { User} from "../models/User";
 
 export class UserController{
@@ -44,7 +46,7 @@ export class UserController{
     // POST /api/users/ - Cria um usuário
     public static async create(req: Request, res: Response): Promise<Response>{
         try{
-            const {nome, email, senha_hash} = req.body;
+            const {nome, email, password} = req.body;
 
             // Nome
             if(!nome || typeof(nome) !== 'string' || nome.trim() === ''){
@@ -52,7 +54,7 @@ export class UserController{
             }
 
             // Senha
-            if(!senha_hash || typeof(senha_hash) !== 'string' || senha_hash.length < 6){
+            if(!password || typeof(password) !== 'string' || password.length < 6){
                 return res.status(400).json({erro: 'A senha deve conter no mímino 6 caracteres.'});
             }
 
@@ -66,6 +68,8 @@ export class UserController{
             if(!email || !emailRegex.test(email.trim())){
                 return res.status(400).json({erro: 'Informe um email válido.'});
             }
+
+            const senha_hash = await bcrypt.hash(password, 10);
 
             if(!nome || !email || !senha_hash){
                 return res.status(400).json({erro: 'Os campos nome, email e senha são obrigatórios.'});
