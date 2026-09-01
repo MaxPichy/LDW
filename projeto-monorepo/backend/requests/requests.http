@@ -19,5 +19,5 @@ Content-Type: application/json
 {
     "nome": "Dean Winchester",
     "email": "dean@email.com",
-    "senha_hash": "123456"
+    "password": "123456"
 }

@@ -1,0 +1,3 @@
+### Testar login e geração do JWT
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json

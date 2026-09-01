@@ -3,12 +3,12 @@ import { sequelize } from '../config/database';
 import { allowedNodeEnvironmentFlags } from 'node:process';
 
 export class User extends Model {
-    public id!: number;
-    public nome!: string;
-    public email!: string;
-    public senha_hash!: string;
-    public readonly createdAt!: Date;
-    public readonly updatedAt!: Date;
+    declare id: number;
+    declare nome: string;
+    declare email: string;
+    declare senha_hash: string;
+    declare readonly createdAt: Date;
+    declare readonly updatedAt: Date;
 }
 
 User.init(
