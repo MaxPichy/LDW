@@ -43,7 +43,8 @@ jobs:
 
             - name: 6. Validar Contrução da Imagem Docker da API
               run: |
-                docker build -t api-service:test ./backend
+                
+                docker build -t api-service:test ./projeto-monorepo/backend
 
             - name: 7. Validar Frontend (quando presente no monorepo)
               run: |
