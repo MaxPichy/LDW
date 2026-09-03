@@ -1,48 +1,47 @@
-import { Model, DataTypes} from 'sequelize';
+import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../config/database';
-import { allowedNodeEnvironmentFlags } from 'node:process';
 
 export class User extends Model {
-    declare id: number;
-    declare nome: string;
-    declare email: string;
-    declare senha_hash: string;
-    declare readonly createdAt: Date;
-    declare readonly updatedAt: Date;
+  declare id: number;
+  declare nome: string;
+  declare email: string;
+  declare senha_hash: string;
+  declare readonly createdAt: Date;
+  declare readonly updatedAt: Date;
 }
 
 User.init(
-    {
-        id: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true
-        },
-        nome: {
-            type: DataTypes.STRING(100),
-            allowNull: false
-        },
-        email: {
-            type: DataTypes.STRING(150),
-            unique: true,
-            allowNull: false
-        },
-        senha_hash: {
-            type: DataTypes.STRING(255),
-            allowNull: false
-        },
-        createdAt: {
-            type: DataTypes.DATE,
-            allowNull: false
-        },
-        updatedAt: {
-            type: DataTypes.DATE,
-            allowNull: false
-        }
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
     },
-    {
-        sequelize,
-        tableName: 'users',
-        timestamps: true
-    }
-)
+    nome: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING(150),
+      unique: true,
+      allowNull: false,
+    },
+    senha_hash: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+  },
+  {
+    sequelize,
+    tableName: 'users',
+    timestamps: true,
+  },
+);

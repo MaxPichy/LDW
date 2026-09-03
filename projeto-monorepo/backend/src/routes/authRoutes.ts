@@ -1,8 +1,8 @@
-import { Router } from "express";
-import { AuthController } from "../controllers/AuthController";
+import { Router } from 'express';
+import { AuthController } from '../controllers/AuthController';
 
 const router = Router();
 
 // Rota pública de login
 router.post('/login', AuthController.login);
-export {router as authRoutes}
+export { router as authRoutes };
