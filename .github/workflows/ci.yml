@@ -40,7 +40,6 @@ jobs:
         run: |
           cd projeto-monorepo
           cd backend
-          pnpm install 
           pnpm run lint
 
       - name: 6. Validar Formatação de Arquivos (Prettier)
