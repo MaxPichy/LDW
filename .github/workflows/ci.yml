@@ -27,7 +27,7 @@ jobs:
           version: 11
 
       - name: 3. Configurar o Node.js 24 com Cache de Dependencias
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v4
         with:
           node-version: 24
 
@@ -40,6 +40,7 @@ jobs:
         run: |
           cd projeto-monorepo
           cd backend
+          pnpm install 
           pnpm run lint
 
       - name: 6. Validar Formatação de Arquivos (Prettier)
