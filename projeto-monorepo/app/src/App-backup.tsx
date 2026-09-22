@@ -1,0 +1,71 @@
+import { useState } from 'react';
+import type { FormEvent } from 'react';
+import { Button } from "./components/Button";
+import { Input } from "./components/Input";
+
+function App() {
+  
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  function handleSubmit(e: FormEvent){
+    e.preventDefault();
+    setLoading(true);
+    setTimeout(() => {
+      alert(`Dados recebidos: ${nome} (${email}).`)
+      setLoading(false);
+    }, 1000)
+  }
+
+  return (
+    <main style={{maxWidth: '640px', margin: '40px auto', padding: '24px', fontFamily: 'sans-serif'}}>
+      <h1>Componentes Tipados</h1>
+
+        <form onSubmit={handleSubmit}>
+          <Input 
+            label='Nome Completo'
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+            placeholder='Nome Completo'
+            required
+          />
+
+          <Input 
+            label='Email Corporativo'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder='Email Corporativo'
+            required
+          />
+
+          <div style={{display: 'flex', gap: '12px', marginTop: '16px'}}>
+            <Button type='submit' variant='primary' isLoading={loading}>
+              Salvar Registro
+            </Button>
+
+            <Button type='button' variant='secondary' onClick={() => {setNome(''); setEmail('');}}}>
+              Limpar Tudo
+            </Button>
+          </div>
+      </form>
+    </main>
+
+    // <>
+    //   <Button>Cadastrar</Button>
+    //   <Button variant="secondary">Resetar</Button>
+    //   <Button variant="danger">Deletar</Button>
+    // </>
+    // Incorreto
+    // <Input label='Email' value='' onChange={(e: number) => {}} />
+
+    // Correto com tipagem do evento ChangeEvent inferida automaticamente
+    // <Input 
+    //   label='Email'
+    //   value=''
+    //   onChange={(e) => setEmail(e.target.value)}
+    // />
+  );
+}
+
+export default App;

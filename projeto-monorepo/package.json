@@ -6,7 +6,7 @@
         "docker:build-api": "docker build -t api-service ./backend",
         "docker:build-app": "docker build -t app-service ./app",
         "compose:up": "docker compose up -d",
-        "compose:down":"docker compose down",
+        "compose:down": "docker compose down",
         "compose:logs": "docker compose logs -f"
     }
 }
