@@ -39,7 +39,6 @@ jobs:
 
       - name: 4. Instalar Dependências do Backend
         run: |
-          cd backend
           pnpm install --no-frozen-lockfile
 
       - name: 5. Validar Padronização de Código (ESLint)
