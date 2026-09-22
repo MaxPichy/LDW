@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { calculateUserMetrics, UserAccount } from './userMetrics';
+import { calculateUserMetrics, UserAccount } from './UserMetrics';
 
 describe('Cálculo de Estatísticas e Métricas: userMetrics.ts', () => {
   it('deve retornar zeros para uma lista vazia de usuários', () => {
