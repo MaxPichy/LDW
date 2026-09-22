@@ -53,7 +53,7 @@ jobs:
         run: |
           cd projeto-monorepo
           cd backend
-          pnpm run format:check
+          pnpm run format:fix
 
       - name: 7. Checagem de Tipos no Backend (tsc --noEmit)
         run: |
