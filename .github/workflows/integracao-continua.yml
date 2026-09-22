@@ -43,11 +43,11 @@ jobs:
 
       - name: 5. Validar Padronização de Código (ESLint)
         run: |
-          pnpm lint
+          pnpm run lint
 
       - name: 6. Validar Formatação de Arquivos (Prettier)
         run: |
-          pnpm format
+          pnpm run format
 
       - name: 7. Checagem de Tipos no Backend (tsc --noEmit)
         run: |
