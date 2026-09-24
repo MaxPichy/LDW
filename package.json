@@ -1,5 +1,6 @@
 {
 	"dependencies": {
-		"eslint": "^10.9.1"
+		"eslint": "^10.9.1",
+		"swagger": "^0.7.5"
 	}
 }
