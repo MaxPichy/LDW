@@ -10,7 +10,6 @@ export interface ValidationResult {
   errors: string[];
 }
 
-
 // Valida o formato de um endereço de e-mail
 export function isValidEmail(email: string): boolean {
   if (!email || typeof email !== 'string') return false;
@@ -28,7 +27,6 @@ export function isStrongPassword(password: string): boolean {
   const hasNumber = /[0-9]/.test(password);
   return hasUpperCase && hasNumber;
 }
-
 
 // Valida os dados para cadastro ou atualização de um usuário
 export function validateUserInput(input: Partial<UserInput>): ValidationResult {

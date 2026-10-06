@@ -11,6 +11,7 @@ export class UserController {
       });
       return res.status(200).json(users);
     } catch (error: any) {
+      console.error("🔥 ERRO REAL em GET /api/users:", error);  // ← ADICIONE ISSO
       return res
         .status(500)
         .json({ erro: 'Erro ao listar usuários.', detalhe: error.message });

@@ -14,7 +14,7 @@ export interface UserMetricsSummary {
   activePercentage: number;
 }
 
- // Calcula a porcentagem de contas ativas e a distribuição de status de usuários.
+// Calcula a porcentagem de contas ativas e a distribuição de status de usuários.
 export function calculateUserMetrics(users: UserAccount[]): UserMetricsSummary {
   if (!users || users.length === 0) {
     return {

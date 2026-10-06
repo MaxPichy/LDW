@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import {app} from './app';
+import { app } from './app';
 import { sequelize } from './config/database';
 
 dotenv.config();
@@ -17,6 +17,7 @@ async function main() {
       );
     });
   } catch (error) {
+    console.error("🔥 ERRO GLOBAL:", error);
     console.log('Erro ao conectar com o banco de dados.', error);
   }
 }

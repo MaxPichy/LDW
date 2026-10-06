@@ -1,4 +1,4 @@
-import express, {Request, Response} from 'express';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
 import { appRoutes } from './routes';
 import swaggerUi from 'swagger-ui-express';
@@ -25,4 +25,4 @@ app.use('/api', appRoutes);
 // Swagger
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-export{app}
+export { app };
