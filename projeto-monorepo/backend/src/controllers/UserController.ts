@@ -89,11 +89,11 @@ export class UserController {
         email: email.trim().toLowerCase(),
         senha_hash,
       });
-      
+
       return res.status(201).json({
         id: novoUser.id,
         nome: novoUser.nome,
-        email: novoUser.email
+        email: novoUser.email,
       });
     } catch (error: any) {
       return res

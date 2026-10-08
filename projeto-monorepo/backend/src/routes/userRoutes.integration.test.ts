@@ -1,4 +1,12 @@
-import { describe, it, expect, beforeAll, beforeEach, afterEach, afterAll } from 'vitest';
+import {
+  describe,
+  it,
+  expect,
+  beforeAll,
+  beforeEach,
+  afterEach,
+  afterAll,
+} from 'vitest';
 import request from 'supertest';
 import { app } from '../app';
 import { sequelize } from '../config/database';
@@ -17,7 +25,7 @@ describe('Testes de Integracao: Rotas de Usuarios (/api/users)', () => {
     await User.destroy({ where: {}, truncate: true });
   });
 
-  afterEach(async () => {                                 
+  afterEach(async () => {
     await User.destroy({ where: {}, truncate: true });
   });
 
