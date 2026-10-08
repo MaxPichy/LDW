@@ -17,7 +17,6 @@ async function main() {
       );
     });
   } catch (error) {
-    console.error("🔥 ERRO GLOBAL:", error);
     console.log('Erro ao conectar com o banco de dados.', error);
   }
 }

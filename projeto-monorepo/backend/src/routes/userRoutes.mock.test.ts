@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import request from 'supertest';
 import { app } from '../app';
 import { User } from '../models/User';
@@ -72,5 +72,27 @@ describe('Testes de Rotas com Mocking do Model User', () => {
     );
     // Garante que o metodo create NUNCA foi chamado apos a deteccao do conflito
     expect(User.create).not.toHaveBeenCalled();
+  });
+});
+
+describe('Testes com vi.spyOn (interceptacao parcial)', () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it('deve chamar User.findAll exatamente uma vez com os atributos corretos', async () => {
+    // Arrange — intercepta APENAS o metodo findAll do User real.
+    // Diferente do vi.mock (que substitui o modulo inteiro), o vi.spyOn
+    // mantém o resto do objeto User intacto e intercepta só o alvo.
+    const spy = vi.spyOn(User, 'findAll').mockResolvedValue([] as any);
+
+    // Act
+    await request(app).get('/api/users');
+
+    // Assert
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalledWith({
+      attributes: ['id', 'nome', 'email', 'createdAt', 'updatedAt'],
+    });
   });
 });

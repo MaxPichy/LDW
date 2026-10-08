@@ -11,7 +11,6 @@ export class UserController {
       });
       return res.status(200).json(users);
     } catch (error: any) {
-      console.error("🔥 ERRO REAL em GET /api/users:", error);  // ← ADICIONE ISSO
       return res
         .status(500)
         .json({ erro: 'Erro ao listar usuários.', detalhe: error.message });
@@ -90,11 +89,11 @@ export class UserController {
         email: email.trim().toLowerCase(),
         senha_hash,
       });
-
+      
       return res.status(201).json({
+        id: novoUser.id,
         nome: novoUser.nome,
-        email: novoUser.email,
-        senha_hash: novoUser.senha_hash,
+        email: novoUser.email
       });
     } catch (error: any) {
       return res
@@ -157,7 +156,6 @@ export class UserController {
         id: user.id,
         nome: user.nome,
         email: user.email,
-        senha_hash: user.senha_hash,
       });
     } catch (error: any) {
       return res
