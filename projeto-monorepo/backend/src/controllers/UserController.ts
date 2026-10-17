@@ -58,7 +58,7 @@ export class UserController {
       if (!password || typeof password !== 'string' || password.length < 6) {
         return res
           .status(400)
-          .json({ erro: 'A senha deve conter no mímino 6 caracteres.' });
+          .json({ erro: 'A senha deve conter no mínimo 6 caracteres.' });
       }
 
       // Email
