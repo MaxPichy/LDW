@@ -96,6 +96,14 @@ jobs:
           echo "Relatório LCOV enviado para o SonarQube com sucesso." >> $GITHUB_STEP_SUMMARY
           echo "Os relatório detalhados em HTML soram salvos como artefato desta execução." >> $GITHUB_STEP_SUMMARY
 
+      - name: 12. Salvar Artefatos de Cobertura (HTML e LCOV)
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-report-backend
+          path: backend/coverage
+          retention-days: 14
+
   # Job 2: Compilação de Produção e Imagens Docker (Só executa se o Job 1 passar)
   build-e-docker:
     name: 2. Compilação e Imagens Docker
