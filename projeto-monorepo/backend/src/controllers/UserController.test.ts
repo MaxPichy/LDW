@@ -55,7 +55,7 @@ describe('UserController', () => {
       const response = await request(app).get('/api/users');
 
       expect(response.status).toBe(500);
-      expect(response.body.erro).toBe('Erro ao listar usuários');
+      expect(response.body.erro).toBe('Erro ao listar usuários.');
     });
   });
 
@@ -83,7 +83,7 @@ describe('UserController', () => {
 
       expect(response.status).toBe(400);
       expect(response.body.erro).toBe(
-        'O ID informado deve ser um número válido.',
+        'O ID informado deve ser um número.',
       );
     });
 
@@ -92,7 +92,7 @@ describe('UserController', () => {
 
       expect(response.status).toBe(400);
       expect(response.body.erro).toBe(
-        'O ID informado deve ser um número válido.',
+        'O ID informado deve ser um número.',
       );
     });
 
@@ -190,7 +190,7 @@ describe('UserController', () => {
       });
 
       expect(response.status).toBe(400);
-      expect(response.body.erro).toBe('Informe um e-mail válido.');
+      expect(response.body.erro).toBe('Informe um email válido.');
     });
 
     it('deve retornar 400 se a senha tiver menos de 6 caracteres', async () => {

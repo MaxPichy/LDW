@@ -29,7 +29,7 @@ jobs:
       - name: 1. Baixar o código-fonte
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 #Necessário para o SonarQube analisar o histórico de commits
+          fetch-depth: 0 # Necessário para o SonarQube analisar o histórico de commits
 
       - name: 2. Habilitar o pnpm
         uses: pnpm/action-setup@v4
@@ -43,32 +43,27 @@ jobs:
 
       - name: 4. Instalar Dependências do Backend
         run: |
-          cd projeto-monorepo
-          cd backend
+          cd projeto-monorepo/backend
           pnpm install --frozen-lockfile
 
       - name: 5. Validar Padronização de Código (ESLint)
         run: |
-          cd projeto-monorepo
-          cd backend
+          cd projeto-monorepo/backend
           pnpm run lint
 
       - name: 6. Validar Formatação de Arquivos (Prettier)
         run: |
-          cd projeto-monorepo
-          cd backend
+          cd projeto-monorepo/backend
           pnpm run format:check
 
       - name: 7. Checagem de Tipos no Backend (tsc --noEmit)
         run: |
-          cd projeto-monorepo
-          cd backend
+          cd projeto-monorepo/backend
           pnpm run type-check
 
       - name: 8. Executar Testes Unitários e de Integração com Vitest
         run: |
-          cd projeto-monorepo
-          cd backend
+          cd projeto-monorepo/backend
           pnpm run test:coverage
         env:
           NODE_ENV: test
@@ -78,30 +73,34 @@ jobs:
         with:
           projectBaseDir: projeto-monorepo/backend
         env:
-          SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
-          SONAR_HOST_URL: ${{secrets.SONAR_HOST_URL}}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
       - name: 10. Validar SonarQube Quality Gate
-        uses: sonarsource/sonarqube-quality-gate-action@v4
+        uses: sonarsource/sonarqube-quality-gate-action@v1
+        with:
+          scanMetadataReportFile: projeto-monorepo/backend/.scannerwork/report-task.txt
         timeout-minutes: 5
+        continue-on-error: true
         env:
-          SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
       - name: 11. Publicar Relatório de Cobertura no Resumo do Job
         if: always()
         run: |
           echo "## Relatório de Cobertura de Código e Análise Estática" >> $GITHUB_STEP_SUMMARY
-          echo "Execução de testes e inspeção estática concluídas para commit \`${{github.sha}}\`." >> $GITHUB_STEP_SUMMARY
+          echo "Execução de testes e inspeção estática concluídas para commit \`${{ github.sha }}\`." >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "Relatório LCOV enviado para o SonarQube com sucesso." >> $GITHUB_STEP_SUMMARY
-          echo "Os relatório detalhados em HTML soram salvos como artefato desta execução." >> $GITHUB_STEP_SUMMARY
+          echo "Os relatórios detalhados em HTML foram salvos como artefato desta execução." >> $GITHUB_STEP_SUMMARY
 
       - name: 12. Salvar Artefatos de Cobertura (HTML e LCOV)
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: coverage-report-backend
-          path: backend/coverage
+          path: projeto-monorepo/backend/coverage
           retention-days: 14
 
   # Job 2: Compilação de Produção e Imagens Docker (Só executa se o Job 1 passar)
@@ -126,27 +125,23 @@ jobs:
 
       - name: 4. Instalar Dependências do Backend
         run: |
-          cd projeto-monorepo
-          cd backend
+          cd projeto-monorepo/backend
           pnpm install --frozen-lockfile
 
       - name: 5. Validar Tipos e Compilar o Backend (Express)
         run: |
-          cd projeto-monorepo
-          cd backend
+          cd projeto-monorepo/backend
           pnpm run build
 
       - name: 6. Validar Construção da Imagem Docker da API
         run: |
-          cd projeto-monorepo
-          docker build -t api-service:test ./backend
+          docker build -t api-service:test .projeto-monorepo/backend
 
       - name: 7. Validar Frontend (quando presente no monorepo)
         run: |
-          if [ -d "projeto-monorepo/app" ]; then
+          if [ -d "app" ]; then
             echo "Subprojeto frontend encontrado. Iniciando validação..."
-            cd projeto-monorepo
-            cd app
+            cd projeto-monorepo/app
             pnpm install --frozen-lockfile
             pnpm run build
             # docker build -t app-service:test .

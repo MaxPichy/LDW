@@ -62,6 +62,11 @@ export class UserController {
       }
 
       // Email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email || typeof(email) != 'string' || !emailRegex.test(email.trim())) {
+        return res.status(400).json({ erro: 'Informe um email válido.' });
+      }
+
       const userExistente = await User.findOne({
         where: { email: email.trim() },
       });
@@ -69,11 +74,6 @@ export class UserController {
         return res
           .status(400)
           .json({ erro: 'Já existe um usuário cadastrado com este email.' });
-      }
-
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!email || !emailRegex.test(email.trim())) {
-        return res.status(400).json({ erro: 'Informe um email válido.' });
       }
 
       const senha_hash = await bcrypt.hash(password, 10);
