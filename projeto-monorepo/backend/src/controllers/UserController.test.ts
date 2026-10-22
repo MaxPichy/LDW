@@ -82,18 +82,14 @@ describe('UserController', () => {
       const response = await request(app).get('/api/users/abc');
 
       expect(response.status).toBe(400);
-      expect(response.body.erro).toBe(
-        'O ID informado deve ser um número.',
-      );
+      expect(response.body.erro).toBe('O ID informado deve ser um número.');
     });
 
     it('deve retornar 400 se o ID for zero ou negativo', async () => {
       const response = await request(app).get('/api/users/0');
 
       expect(response.status).toBe(400);
-      expect(response.body.erro).toBe(
-        'O ID informado deve ser um número.',
-      );
+      expect(response.body.erro).toBe('O ID informado deve ser um número.');
     });
 
     it('deve retornar 404 se o usuário não for encontrado', async () => {
@@ -280,9 +276,7 @@ describe('UserController', () => {
         .send({ nome: 'Alice' });
 
       expect(response.status).toBe(400);
-      expect(response.body.erro).toBe(
-        'O ID informado deve ser um número.',
-      );
+      expect(response.body.erro).toBe('O ID informado deve ser um número.');
     });
 
     it('deve retornar 404 se o usuário não for encontrado', async () => {
@@ -405,9 +399,7 @@ describe('UserController', () => {
       const response = await request(app).delete('/api/users/abc');
 
       expect(response.status).toBe(400);
-      expect(response.body.erro).toBe(
-        'O ID informado deve ser um número.',
-      );
+      expect(response.body.erro).toBe('O ID informado deve ser um número.');
     });
 
     it('deve retornar 404 se o usuário não for encontrado', async () => {

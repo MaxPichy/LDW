@@ -63,7 +63,11 @@ export class UserController {
 
       // Email
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!email || typeof(email) != 'string' || !emailRegex.test(email.trim())) {
+      if (
+        !email ||
+        typeof email != 'string' ||
+        !emailRegex.test(email.trim())
+      ) {
         return res.status(400).json({ erro: 'Informe um email válido.' });
       }
 
