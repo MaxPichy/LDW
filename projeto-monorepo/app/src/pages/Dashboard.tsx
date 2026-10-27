@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useAuth } from '../hooks/useAuth';
 import {
   Card,
@@ -6,11 +7,16 @@ import {
   CardDescription,
   CardContent,
 } from '@/components/ui/card';
+=======
+// src/pages/Dashboard.tsx
+import { useAuth } from '../hooks/useAuth';
+>>>>>>> eead0b42c5b8e2e86d158b9f632663bf7a173319
 
 export function Dashboard() {
   const { user } = useAuth();
 
   return (
+<<<<<<< HEAD
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-slate-900">Painel Principal</h1>
@@ -44,6 +50,22 @@ export function Dashboard() {
           </p>
         </CardContent>
       </Card>
+=======
+    <div className="space-y-4">
+      <h1 className="text-2xl font-bold text-slate-900">Painel Principal</h1>
+      <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <p className="text-slate-700">
+          Sessão ativa com o usuário: <strong>{user?.nome}</strong> (
+          {user?.email})
+        </p>
+        <p className="text-sm text-slate-500 mt-1">
+          Nível de acesso:{' '}
+          <span className="font-semibold uppercase">
+            {user?.perfil || 'usuario'}
+          </span>
+        </p>
+      </div>
+>>>>>>> eead0b42c5b8e2e86d158b9f632663bf7a173319
     </div>
   );
 }

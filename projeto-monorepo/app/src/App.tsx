@@ -1,34 +1,37 @@
+// src/App.tsx
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthProvider';
+import { ProtectedRoute } from './components/ProtectedRoute';
+import { PublicOnlyRoute } from './components/PublicOnlyRoute';
 import { AppLayout } from './components/AppLayout';
 
-function Dashboard() {
-  return (
-    <h1 className="text-x1 font-bold text-slate-800">Dashboard do Sistema</h1>
-  );
-}
-
-function Perfil() {
-  return (
-    <h1 className="text-x1 font-bold text-slate-800">Perfil do Usuário</h1>
-  );
-}
+// Telas da aplicacao
+import { Login } from './pages/Login';
+import { Dashboard } from './pages/Dashboard';
+import { Perfil } from './pages/Perfil';
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<AppLayout />}>
-          <Route
-            path="/"
-            element={<Navigate to="/dashboard" replace />}
-          ></Route>
-          <Route path="/dashboard" element={<Dashboard />}></Route>
-          <Route path="/perfil" element={<Perfil />}></Route>
-        </Route>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          {/* Rotas Abertas apenas para usuarios deslogados */}
+          <Route element={<PublicOnlyRoute />}>
+            <Route path="/login" element={<Login />} />
+          </Route>
 
-        {/* Redirecionamento de segurança para qualquer rota desconhecida */}
-        <Route path="*" element={<Navigate to="/dashboard" replace />}></Route>
-      </Routes>
-    </BrowserRouter>
+          {/* Rotas Protegidas por Autenticacao */}
+          <Route element={<ProtectedRoute />}>
+            <Route element={<AppLayout />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/perfil" element={<Perfil />} />
+            </Route>
+          </Route>
+
+          {/* Rota padrao de fallback */}
+          <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
