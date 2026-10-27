@@ -1,4 +1,3 @@
-// src/pages/Perfil.tsx
 import { useAuth } from '../hooks/useAuth';
 
 export function Perfil() {
