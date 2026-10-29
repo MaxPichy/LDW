@@ -4,7 +4,7 @@
 FROM node:20-alpine AS builder
 
 # Instalação do pnpm globalmente
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN corepack enable && corepack prepare pnpm@10.34.2 --activate
 
 WORKDIR /app
 
