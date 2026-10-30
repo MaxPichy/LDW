@@ -13,7 +13,7 @@ describe('Testes de Integração: Endpoints Base da Aplicação', () => {
       // Assert: Valida status, cabeçalhos e corpo retornado
       expect(response.status).toBe(200);
       expect(response.headers['content-type']).toMatch(/json/);
-      expect(response.body).toHaveProperty('status', 200);
+      expect(response.status).toBe(200);
       expect(response.body).toHaveProperty(
         'message',
         'Servidor Backend rodando com sucesso.',

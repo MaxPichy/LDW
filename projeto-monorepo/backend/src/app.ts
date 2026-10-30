@@ -13,8 +13,7 @@ app.use(express.json());
 // Rota de Health Check utilizada pelo Render para validar o deploy
 app.get('/api/health', (req: Request, res: Response) => {
   res.status(200).json({
-    status: 'OK',
-    mensagem: 'Servidor Backend rodando com sucesso.',
+    message: 'Servidor Backend rodando com sucesso.',
     timestamp: new Date().toISOString(),
   });
 });
