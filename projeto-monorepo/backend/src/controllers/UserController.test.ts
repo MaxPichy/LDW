@@ -250,15 +250,19 @@ describe('UserController', () => {
   // PUT /api/users/:id - update
   // ──────────────────────────────────────────────
   describe('PUT /api/users/:id', () => {
-    it('deve atualizar o usuário com sucesso', async () => {
-      const mockUser = {
+    let mockUser: any;
+    beforeEach(() => {
+      mockUser = {
         id: 1,
         nome: 'Alice',
         email: 'alice@email.com',
         createdAt: new Date(),
         save: vi.fn().mockResolvedValue(undefined),
       };
-      vi.mocked(User.findByPk).mockResolvedValue(mockUser as any);
+      vi.mocked(User.findByPk).mockResolvedValue(mockUser);
+    });
+
+    it('deve atualizar o usuário com sucesso', async () => {
       vi.mocked(User.findOne).mockResolvedValue(null);
 
       const response = await request(app).put('/api/users/1').send({
@@ -291,14 +295,6 @@ describe('UserController', () => {
     });
 
     it('deve retornar 404 se o nome fornecido for inválido (apenas espaços)', async () => {
-      const mockUser = {
-        id: 1,
-        nome: 'Alice',
-        email: 'alice@email.com',
-        save: vi.fn(),
-      };
-      vi.mocked(User.findByPk).mockResolvedValue(mockUser as any);
-
       const response = await request(app)
         .put('/api/users/1')
         .send({ nome: '   ' });
@@ -308,14 +304,6 @@ describe('UserController', () => {
     });
 
     it('deve retornar 400 se o e-mail fornecido for inválido', async () => {
-      const mockUser = {
-        id: 1,
-        nome: 'Maria',
-        email: 'maria@email.com',
-        save: vi.fn(),
-      };
-      vi.mocked(User.findByPk).mockResolvedValue(mockUser as any);
-
       const response = await request(app)
         .put('/api/users/1')
         .send({ email: 'email-invalido' });
@@ -325,13 +313,6 @@ describe('UserController', () => {
     });
 
     it('deve retornar 400 se o e-mail já estiver em uso por outro usuário', async () => {
-      const mockUser = {
-        id: 1,
-        nome: 'Alice',
-        email: 'alice@email.com',
-        save: vi.fn(),
-      };
-      vi.mocked(User.findByPk).mockResolvedValue(mockUser as any);
       vi.mocked(User.findOne).mockResolvedValue({
         id: 2,
         email: 'outro@email.com',
@@ -346,15 +327,6 @@ describe('UserController', () => {
     });
 
     it('não deve retornar erro se o email em uso pertencer ao próprio usuário', async () => {
-      const mockUser = {
-        id: 1,
-        nome: 'Alice',
-        email: 'alice@email.com',
-        createdAt: new Date(),
-        save: vi.fn().mockResolvedValue(undefined),
-      };
-      vi.mocked(User.findByPk).mockResolvedValue(mockUser as any);
-      // findOne retorna o próprio usuário (mesmo id)
       vi.mocked(User.findOne).mockResolvedValue({
         id: 1,
         email: 'alice@email.com',

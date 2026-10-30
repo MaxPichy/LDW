@@ -72,7 +72,7 @@ jobs:
           NODE_ENV: test
 
       - name: 9. Executar Análise Estática com SonarQube
-        uses: sonarsource/sonarqube-scan-action@v4
+        uses: sonarsource/sonarqube-scan-action@bfd4e558cda28cda6b5defafb9232d191be8c203
         with:
           projectBaseDir: projeto-monorepo/backend
         env:
@@ -80,7 +80,7 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
       - name: 10. Validar SonarQube Quality Gate
-        uses: sonarsource/sonarqube-quality-gate-action@v1
+        uses: uses: sonarsource/sonarqube-quality-gate-action@7a5fffe8e523c40e0c740b6bc2712ab503e52efa
         with:
           scanMetadataReportFile: projeto-monorepo/backend/.scannerwork/report-task.txt
         timeout-minutes: 5
