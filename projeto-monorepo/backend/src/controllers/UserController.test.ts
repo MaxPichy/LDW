@@ -310,8 +310,8 @@ describe('UserController', () => {
     it('deve retornar 400 se o e-mail fornecido for inválido', async () => {
       const mockUser = {
         id: 1,
-        nome: 'Alice',
-        email: 'alice@email.com',
+        nome: 'Maria',
+        email: 'maria@email.com',
         save: vi.fn(),
       };
       vi.mocked(User.findByPk).mockResolvedValue(mockUser as any);
